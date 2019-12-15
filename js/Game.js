@@ -1,5 +1,6 @@
-;(function(window){
-    function Game(){
+;
+(function (window) {
+    function Game() {
         //获取canvas元素
         this.canvas = document.getElementById('canvas');
         //设置绘制环境
@@ -8,9 +9,40 @@
         let w = document.documentElement.clientWidth;
         let h = document.documentElement.clientHeight;
         //设置canvas的宽和高
-        this.canvas.width = w>420?420:w;
-        this.canvas.height = h>750?750:h;
+        this.canvas.width = w > 420 ? 420 : w;
+        this.canvas.height = h > 750 ? 750 : h;
+        //加载的图片
+        this.allImg = {
+            "bg_day": "images/bg_day.png",
+            "land": "images/land.png"
+        };
+        //设置一个计数器，计数已经加载的图片个数
+        let count = 0;
+        //需要加载的图片个数
+        let total = Object.keys(this.allImg).length;
+        //遍历对象，加载图片
+        for (let key in this.allImg) {
+            ((src) => {
+                this.allImg[key] = new Image;
+                this.allImg[key].src = src;
+                //图片加载完成后的方法
+                this.allImg[key].onload = () => {
+                    count++;
+                    if (count == total) {
+                        this.start();
+                    }
+                }
+            })(this.allImg[key]);
+        }
     }
-    // Game.prototype
+    Game.prototype.clear = function () {
+        //清屏
+        this.draw.clearRect(0,0,this.canvas.width,this.canvas.height);
+    }
+    Game.prototype.start = function () {
+        //游戏开始
+        this.bg = new Background();
+        console.log(this.bg);
+    }
     window.Game = Game;
 })(window);
