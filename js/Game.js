@@ -16,7 +16,10 @@
             "bg_day": "images/bg_day.png",
             "land": "images/land.png",
             "pipe_down":"images/pipe_down.png",
-            "pipe_up":"images/pipe_up.png"
+            "pipe_up":"images/pipe_up.png",
+            "bird0_0":"images/bird0_0.png",
+            "bird0_1":"images/bird0_1.png",
+            "bird0_2":"images/bird0_2.png"
         };
         //设置一个计数器，计数已经加载的图片个数
         let count = 0;
@@ -36,6 +39,7 @@
                 }
             })(this.allImg[key]);
         }
+        this.bindEvent();
     }
     Game.prototype.clear = function () {
         //清屏
@@ -45,12 +49,13 @@
         //游戏开始
         this.bg = new Background();
         this.land = new Land();
+        this.bird = new Bird();
 
         //管道一屏里面可以有多个，所以把所有管道放进数组中储存
         this.pipeArr = [];
         //记录帧数
         this.frame = 0;
-        setInterval(()=>{
+        this.timer = setInterval(()=>{
             //先调用清屏方法，清屏
             this.clear();
 
@@ -68,7 +73,14 @@
             if(this.frame%100 == 0){
                 new Pipe();
             }
+            this.bird.update();
+            this.bird.render();
         },20);
+    }
+    Game.prototype.bindEvent = function() {
+        this.canvas.onclick = ()=>{
+            this.bird.fly();
+        }
     }
     window.Game = Game;
 })(window);
