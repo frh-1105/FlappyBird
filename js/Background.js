@@ -4,7 +4,7 @@
         this.x = 0;
         this.w = 288;
         this.h = 512;
-        this.step = 1;
+        this.step = 2;
     }
     //更新
     Background.prototype.update = function () {

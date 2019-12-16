@@ -3,7 +3,7 @@
         this.x = 0;
         this.w = 336;
         this.h = 112;
-        this.step = 1;
+        this.step = 2;
     }
     Land.prototype.update = function (){
         this.x -= this.step;

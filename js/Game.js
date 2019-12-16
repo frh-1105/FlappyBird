@@ -15,8 +15,8 @@
         this.allImg = {
             "bg_day": "images/bg_day.png",
             "land": "images/land.png",
-            "pipe_down":"pipe_down.png",
-            "pipe_up":"pipe_up.png"
+            "pipe_down":"images/pipe_down.png",
+            "pipe_up":"images/pipe_up.png"
         };
         //设置一个计数器，计数已经加载的图片个数
         let count = 0;
@@ -46,6 +46,10 @@
         this.bg = new Background();
         this.land = new Land();
 
+        //管道一屏里面可以有多个，所以把所有管道放进数组中储存
+        this.pipeArr = [];
+        //记录帧数
+        this.frame = 0;
         setInterval(()=>{
             //先调用清屏方法，清屏
             this.clear();
@@ -55,6 +59,15 @@
 
             this.land.update();
             this.land.render();
+            this.frame++;
+            
+            this.pipeArr.forEach((item)=>{
+                item.update();
+                item.render();
+            });
+            if(this.frame%100 == 0){
+                new Pipe();
+            }
         },20);
     }
     window.Game = Game;
