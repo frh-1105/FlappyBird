@@ -42,7 +42,18 @@
     Game.prototype.start = function () {
         //游戏开始
         this.bg = new Background();
-        console.log(this.bg);
+        this.land = new Land();
+
+        setInterval(()=>{
+            //先调用清屏方法，清屏
+            this.clear();
+
+            this.bg.update();
+            this.bg.render();
+
+            this.land.update();
+            this.land.render();
+        },20);
     }
     window.Game = Game;
 })(window);
