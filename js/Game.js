@@ -14,7 +14,9 @@
         //加载的图片
         this.allImg = {
             "bg_day": "images/bg_day.png",
-            "land": "images/land.png"
+            "land": "images/land.png",
+            "pipe_down":"pipe_down.png",
+            "pipe_up":"pipe_up.png"
         };
         //设置一个计数器，计数已经加载的图片个数
         let count = 0;
