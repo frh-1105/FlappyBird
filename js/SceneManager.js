@@ -2,7 +2,6 @@
 (function () {
     function SceneManager() {
         this.bindEvent();
-        that = this;
     }
     SceneManager.prototype.enter = function (number) {
         switch (number) {
@@ -39,9 +38,9 @@
                 let arr = JSON.parse(localStorage.getItem("FB"));
                 arr.sort((a, b) => b - a);
                 //存储的数组不用太长
-                // if (arr.length > 4) {
-                //     arr.length = 4;
-                // }
+                if (arr.length > 4) {
+                    arr.length = 4;
+                }
                 //将最大记录获取出来,用来渲染计分板的
                 this.best = arr[0];
                 if (game.score > arr[0]) {
@@ -58,7 +57,6 @@
                     arr.push(game.score);
                 }
                 localStorage.setItem("FB", JSON.stringify(arr));
-                console.log(this.best);
                 break;
         }
     }
