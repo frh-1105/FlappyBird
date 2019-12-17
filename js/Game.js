@@ -15,6 +15,9 @@
 
         this.scene = 0;//场景编号
         this.score = 0;//分数
+        if(!localStorage.getItem("FB")){
+            localStorage.setItem("FB","[]");
+        }
     }
     Game.prototype.clear = function () {
         //清屏
@@ -29,7 +32,7 @@
         //实例化场景管理器
         this.sm = new SceneManager();
         //进入哪个场景
-        this.sm.enter(0);
+        this.sm.enter(2);
 
         //管道一屏里面可以有多个，所以把所有管道放进数组中储存
         // this.pipeArr = [];
@@ -81,6 +84,13 @@
             "number7":"images/font_055.png",
             "number8":"images/font_056.png",
             "number9":"images/font_057.png",
+            "medals_0":"images/medals_0.png",
+            "medals_1":"images/medals_1.png",
+            "medals_2":"images/medals_2.png",
+            "medals_3":"images/medals_3.png",
+            "text_game_over":"images/text_game_over.png",
+            "text_ready":"images/text_ready.png",
+            "score_panel":"images/score_panel.png"
         };
         //设置一个计数器，计数已经加载的图片个数
         let count = 0;

@@ -28,9 +28,36 @@
                 break;
             case 3:
                 game.scene = 3;
+                // this.isBooM = false;
                 break;
             case 4:
                 game.scene = 4;
+                this.game_overY = 0;
+                this.panelY = game.canvas.height;
+                //获取存储在本地的成绩
+                let arr = JSON.parse(localStorage.getItem("FB"));
+                arr.sort((a,b)=>b-a);
+                //存储的数组不用太长
+                if(arr.length>4){
+                    arr.length = 4;
+                }
+                //将最大记录获取出来,用来渲染计分板的
+                this.best = arr[0];
+                if(game.score>arr[0]){
+                    this.medal = "medals_1";
+                    this.best = game.score;
+                }else if(game.score>arr[1]){
+                    this.medal = "medals_2";
+                }else if(game.score>arr[2]){
+                    this.medal = "medals_3";
+                }else {
+                    this.medal = "medals_0";
+                }
+                if(!arr.includes(game.score)){
+                    arr.push(game.score);
+                }
+                localStorage.setItem("FB",JSON.stringify(arr));
+                console.log(this.best);
                 break;
         }
     }
@@ -63,27 +90,62 @@
                 game.draw.restore();
                 break;
             case 2:
-                
                 game.bg.update();
                 game.bg.render();
                 game.land.update();
                 game.land.render();
                 game.bird.update();
                 game.bird.render();
-                if(game.frame%100 == 0){
+                if (game.frame % 100 == 0) {
                     new Pipe();
                 }
-                game.pipeArr.forEach((item)=>{
+                game.pipeArr.forEach((item) => {
                     item.update();
                     item.render();
                 })
                 scoreRender();
                 break;
             case 3:
+                game.bg.render();
+                game.land.render();
+                for (let i = 0; i < game.pipeArr.length; i++) {
+                    game.pipeArr[i].render();
+                }
+                // if (this.isBooM) {
+                //     //爆炸
+                // } else {
+                //     //下落过程
+                //     game.bird.y += 5;
+                //     if (game.bird.y >= game.canvas.height - 112) {
+                //         game.bird.y = game.canvas.height - 112;
+                //         this.isBooM = true;
+                //     }
+                //     game.bird.render();
+                // }
+                game.bird.y += 5;
+                if (game.bird.y >= game.canvas.height - 112) {
+                    game.bird.y = game.canvas.height - 112;
+                    //落地后进入下一个场景
+                    this.enter(4);
+                }
+                game.bird.render();
 
                 break;
             case 4:
-
+                game.bg.render();
+                game.land.render();
+                for (let i = 0; i < game.pipeArr.length; i++) {
+                    game.pipeArr[i].render();
+                }
+                scoreRender();
+                //画出计分板和game_over
+                this.game_overY += 5;
+                if(this.game_overY>=200)this.game_overY = 200;
+                this.panelY -= 10;
+                if(this.panelY <= 270)this.panelY = 270;
+                game.draw.drawImage(game.allImg["score_panel"],(game.canvas.width-238)/2,this.panelY);
+                game.draw.drawImage(game.allImg[this.medal],(game.canvas.width-238)/2+33,this.panelY+45);
+                game.draw.drawImage(game.allImg["text_game_over"],(game.canvas.width-204)/2,this.game_overY);
                 break;
         }
     }
@@ -120,12 +182,12 @@
         game.draw.drawImage(game.allImg["land"], 336, game.canvas.height - 112);
     }
     //渲染分数
-    function scoreRender (){
+    function scoreRender() {
         //根据得分的位数拼接图片个数
         let score = game.score.toString();
-        let centerline = (game.canvas.width-score.length*24)/2;
-        for(let i = 0;i < score.length;i++){
-            game.draw.drawImage(game.allImg["number"+score[i]],centerline+i*24,100);
+        let centerline = (game.canvas.width - score.length * 24) / 2;
+        for (let i = 0; i < score.length; i++) {
+            game.draw.drawImage(game.allImg["number" + score[i]], centerline + i * 24, 100);
         }
     }
     window.SceneManager = SceneManager;

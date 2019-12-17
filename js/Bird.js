@@ -33,7 +33,7 @@
 
         //落地检测
         if(this.y > game.canvas.height -112 -15){
-            clearInterval(game.timer);
+            game.sm.enter(4);
         }
         
     }

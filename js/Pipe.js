@@ -3,7 +3,7 @@
         //上管道随机高度
         this.top_h = Math.random()*120+100;
         //空隙间隔
-        this.space = 140;
+        this.space = 200;
         //下管道高度
         this.bottom_h = game.canvas.height-112-this.top_h-this.space;
         //水平位置
@@ -29,7 +29,7 @@
         this.y2 = this.top_h+this.space;
         //碰撞检测
         if ((game.bird.x2>this.x1&&game.bird.y1<this.y1&&game.bird.x1<this.x2)||(game.bird.x2>this.x1&&game.bird.y2>this.y2&&game.bird.x1<this.x2)){
-            clearInterval(game.timer);
+            game.sm.enter(3);
         }
         //加分检测
         if (this.done&&game.bird.x1 > this.x2) {
