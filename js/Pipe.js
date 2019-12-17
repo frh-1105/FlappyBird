@@ -10,6 +10,7 @@
         this.x = game.canvas.width;
         this.step = 2;
         game.pipeArr.push(this);
+        this.done = true;
     }
     Pipe.prototype.update = function(){
         this.x -= this.step;
@@ -20,6 +21,20 @@
                     i--;
                 }
             }
+        }
+        //记录上下管道口左边的坐标
+        this.x1 = this.x;
+        this.x2 = this.x +52;
+        this.y1 = this.top_h;
+        this.y2 = this.top_h+this.space;
+        //碰撞检测
+        if ((game.bird.x2>this.x1&&game.bird.y1<this.y1&&game.bird.x1<this.x2)||(game.bird.x2>this.x1&&game.bird.y2>this.y2&&game.bird.x1<this.x2)){
+            clearInterval(game.timer);
+        }
+        //加分检测
+        if (this.done&&game.bird.x1 > this.x2) {
+            game.score++;
+            this.done = false;
         }
     }
     Pipe.prototype.render = function(){
