@@ -43,22 +43,7 @@
             this.clear();
 
             this.sm.updateAndRender();
-            // this.bg.update();
-            // this.bg.render();
-
-            // this.land.update();
-            // this.land.render();
             this.frame++;
-            
-            // this.pipeArr.forEach((item)=>{
-            //     item.update();
-            //     item.render();
-            // });
-            // if(this.frame%100 == 0){
-            //     new Pipe();
-            // }
-            // this.bird.update();
-            // this.bird.render();
         },20);
     }
     Game.prototype.loadImg = function(){
@@ -84,6 +69,26 @@
             "number7":"images/font_055.png",
             "number8":"images/font_056.png",
             "number9":"images/font_057.png",
+            "small_number0":"images/number_context_00.png",
+            "small_number1":"images/number_context_01.png",
+            "small_number2":"images/number_context_02.png",
+            "small_number3":"images/number_context_03.png",
+            "small_number4":"images/number_context_04.png",
+            "small_number5":"images/number_context_05.png",
+            "small_number6":"images/number_context_06.png",
+            "small_number7":"images/number_context_07.png",
+            "small_number8":"images/number_context_08.png",
+            "small_number9":"images/number_context_09.png",
+            "number_score_00":"images/number_score_00.png",
+            "number_score_01":"images/number_score_01.png",
+            "number_score_02":"images/number_score_02.png",
+            "number_score_03":"images/number_score_03.png",
+            "number_score_04":"images/number_score_04.png",
+            "number_score_05":"images/number_score_05.png",
+            "number_score_06":"images/number_score_06.png",
+            "number_score_07":"images/number_score_07.png",
+            "number_score_08":"images/number_score_08.png",
+            "number_score_09":"images/number_score_09.png",
             "medals_0":"images/medals_0.png",
             "medals_1":"images/medals_1.png",
             "medals_2":"images/medals_2.png",
